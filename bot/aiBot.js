@@ -5,11 +5,11 @@ async function aiBot(text) {
     const res = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",
       {
-        model: "llama-3.1-70b-versatile",
+        model: "llama3-8b-8192", // đổi model dễ dùng hơn
         messages: [
           {
             role: "system",
-            content: "Bạn là nhân viên chăm sóc khách hàng thân thiện, trả lời ngắn gọn."
+            content: "Bạn là nhân viên CSKH, trả lời ngắn gọn, thân thiện."
           },
           {
             role: "user",
@@ -19,7 +19,8 @@ async function aiBot(text) {
       },
       {
         headers: {
-          Authorization: `Bearer ${process.env.GROQ_API_KEY}`
+          "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+          "Content-Type": "application/json"
         }
       }
     );
@@ -27,7 +28,7 @@ async function aiBot(text) {
     return res.data.choices[0].message.content;
 
   } catch (err) {
-    console.log("AI error:", err.message);
+    console.log("AI error:", err.response?.data || err.message);
     return "Xin lỗi, hiện tại mình không thể trả lời.";
   }
 }
