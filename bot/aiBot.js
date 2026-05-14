@@ -5,7 +5,7 @@ async function aiBot(text) {
     const res = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",
       {
-        model: "llama3-8b-8192", // đổi model dễ dùng hơn
+        model: "llama-3.3-70b-versatile", // đổi model dễ dùng hơn
         messages: [
           {
             role: "system",
