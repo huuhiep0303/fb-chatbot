@@ -1,9 +1,9 @@
 const axios = require("axios");
 
 async function sendMessage(senderId, text) {
-  console.log("BOT:", text); 
-  
   try {
+    console.log(`BOT (${senderId}):`, text);
+
     await axios.post(
       "https://graph.facebook.com/v18.0/me/messages",
       {
